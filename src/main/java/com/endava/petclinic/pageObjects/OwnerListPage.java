@@ -16,7 +16,7 @@ public class OwnerListPage {
 
 	private WebDriver driver;
 
-	By row = By.cssSelector( "table tbody tr" );
+	By row = By.cssSelector( "table > tbody > tr" );
 	By nameCell = By.cssSelector( "td:nth-child(1)" );
 	By addressCell = By.cssSelector( "td:nth-child(2)" );
 	By cityCell = By.cssSelector( "td:nth-child(3)" );

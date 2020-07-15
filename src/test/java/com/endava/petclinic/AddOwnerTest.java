@@ -26,7 +26,8 @@ public class AddOwnerTest extends TestBaseClass {
 		OwnerListPage ownerListPage = addOwnerPage.addNewOwner( owner );
 
 		//THEN
-		assertThat( driver.getCurrentUrl() ).endsWith( "/owners" );
+		Owner actualOwner = ownerListPage.getOwnerFromTable( owner.getTelephone() );
+		assertThat( actualOwner ).isEqualTo( owner );
 
 	}
 

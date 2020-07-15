@@ -3,6 +3,7 @@ package com.endava.petclinic.pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.endava.petclinic.EnvReader;
@@ -35,6 +36,7 @@ public class AddOwnerPage {
 	}
 
 	public OwnerListPage addNewOwner( Owner owner ) {
+
 		WebDriverWait wait = new WebDriverWait( driver, 10 );
 		wait.until( ExpectedConditions.visibilityOfElementLocated( firstNameInput ) ).sendKeys( owner.getFirstName() );
 		wait.until( ExpectedConditions.visibilityOfElementLocated( lastNameInput ) ).sendKeys( owner.getLastName() );

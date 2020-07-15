@@ -2,18 +2,12 @@ package com.endava.petclinic;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.endava.petclinic.model.Owner;
 import com.endava.petclinic.pageObjects.OwnerListPage;
-
-import java.util.List;
 
 public class OwnerListTest extends TestBaseClass {
 

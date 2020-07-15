@@ -6,14 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.endava.petclinic.data.DataGeneration;
+import com.endava.petclinic.driver.DriverManager;
 import com.github.javafaker.Faker;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import java.io.File;
-import java.util.concurrent.TimeUnit;
 
 public class TestBaseClass {
 
@@ -23,10 +21,7 @@ public class TestBaseClass {
 
 	@BeforeEach
 	public void setUpDriver() {
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait( 10, TimeUnit.SECONDS );
+		driver = DriverManager.getWebDriver();
 	}
 
 	@AfterEach
