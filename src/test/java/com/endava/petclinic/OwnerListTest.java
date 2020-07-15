@@ -10,34 +10,30 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.endava.petclinic.model.Owner;
+import com.endava.petclinic.pageObjects.OwnerListPage;
+
 import java.util.List;
 
 public class OwnerListTest extends TestBaseClass {
-
-	private String baseUrl = EnvReader.getBaseUrl() + "owners";
-
-	@BeforeEach
-	public void openUrl() {
-		driver.get( baseUrl );
-	}
 
 	@Test
 	public void shouldVerifyOwnerListGivenExistingOwner() {
 
 		//GIVEN
+		OwnerListPage ownerListPage = new OwnerListPage( driver );
+		ownerListPage.load();
 
 		//WHEN
-		WebDriverWait wait = new WebDriverWait( driver, 15 );
-		List<WebElement> firstRowCells = wait.until( ExpectedConditions.presenceOfNestedElementsLocatedBy( By.cssSelector( "table" ),
-				By.cssSelector( "tbody tr:first-child td" ) ) );
+		Owner ownerDetails = ownerListPage.getOwnerFromTable( "6085551023" );
 
 		//THEN
-		assertThat( firstRowCells.get( 0 ).getText() ).isEqualTo( "George Franklin" );
-		assertThat( firstRowCells.get( 0 ).findElement( By.cssSelector( "a" ) ).getAttribute( "href" ) ).isEqualTo( baseUrl + "/1" );
-		assertThat( firstRowCells.get( 1 ).getText() ).isEqualTo( "110 W. Liberty St." );
-		assertThat( firstRowCells.get( 2 ).getText() ).isEqualTo( "Madison" );
-		assertThat( firstRowCells.get( 3 ).getText() ).isEqualTo( "6085551023" );
-		assertThat( firstRowCells.get( 4 ).getText() ).isEqualTo( "Leo" );
+		assertThat( ownerDetails.getFirstName() ).isEqualTo( "George" );
+		assertThat( ownerDetails.getLastName() ).isEqualTo( "Franklin" );
+		assertThat( ownerDetails.getAddress() ).isEqualTo( "110 W. Liberty St." );
+		assertThat( ownerDetails.getCity() ).isEqualTo( "Madison" );
+		assertThat( ownerDetails.getTelephone() ).isEqualTo( "6085551023" );
+//		assertThat( ownerDetails.get( 4 ) ).isEqualTo( "Leo" );
 	}
 
 	@Test

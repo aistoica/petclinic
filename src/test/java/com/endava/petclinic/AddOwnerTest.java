@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.endava.petclinic.model.Owner;
 import com.endava.petclinic.pageObjects.AddOwnerPage;
 import com.endava.petclinic.pageObjects.OwnerListPage;
 
@@ -19,9 +20,10 @@ public class AddOwnerTest extends TestBaseClass {
 		AddOwnerPage addOwnerPage = new AddOwnerPage( driver );
 		addOwnerPage.load();
 
+		Owner owner = dataGeneration.generateRandomOwner();
+
 		//WHEN
-		OwnerListPage ownerListPage = addOwnerPage.addNewOwner( faker.name().firstName(), faker.name().lastName(),
-				faker.address().streetAddress(), faker.address().city(), faker.number().digits( 10 ) );
+		OwnerListPage ownerListPage = addOwnerPage.addNewOwner( owner );
 
 		//THEN
 		assertThat( driver.getCurrentUrl() ).endsWith( "/owners" );
@@ -35,9 +37,11 @@ public class AddOwnerTest extends TestBaseClass {
 		AddOwnerPage addOwnerPage = new AddOwnerPage( driver );
 		addOwnerPage.load();
 
+		Owner owner = dataGeneration.generateRandomOwner();
+		owner.setTelephone( "111AAA" );
+
 		//WHEN
-		addOwnerPage.addNewOwner( faker.name().firstName(), faker.name().lastName(), faker.address().streetAddress(), faker.address().city(),
-				faker.lorem().characters( 5 ) + faker.number().digits( 5 ) );
+		addOwnerPage.addNewOwner( owner );
 
 		//THEN
 		assertThat( addOwnerPage.isSubmitButtonEnabled() ).isFalse();

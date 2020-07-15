@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.endava.petclinic.EnvReader;
+import com.endava.petclinic.model.Owner;
 
 public class AddOwnerPage {
 
@@ -19,6 +20,7 @@ public class AddOwnerPage {
 	private By cityInput = By.id( "city" );
 	private By telephoneInput = By.id( "telephone" );
 	private By submitButton = By.cssSelector( "button[type='submit']" );
+	//	private By errorMessage = ....
 
 	public AddOwnerPage( WebDriver driver ) {
 		this.driver = driver;
@@ -32,18 +34,18 @@ public class AddOwnerPage {
 		return baseUrl;
 	}
 
-	public OwnerListPage addNewOwner( String firstName, String lastName, String address, String city, String telephone ) {
+	public OwnerListPage addNewOwner( Owner owner ) {
 		WebDriverWait wait = new WebDriverWait( driver, 10 );
-		wait.until( ExpectedConditions.visibilityOfElementLocated( firstNameInput ) ).sendKeys( firstName );
-		wait.until( ExpectedConditions.visibilityOfElementLocated( lastNameInput ) ).sendKeys( lastName );
-		wait.until( ExpectedConditions.visibilityOfElementLocated( addressInput ) ).sendKeys( address );
-		wait.until( ExpectedConditions.visibilityOfElementLocated( cityInput ) ).sendKeys( city );
-		wait.until( ExpectedConditions.visibilityOfElementLocated( telephoneInput ) ).sendKeys( telephone );
+		wait.until( ExpectedConditions.visibilityOfElementLocated( firstNameInput ) ).sendKeys( owner.getFirstName() );
+		wait.until( ExpectedConditions.visibilityOfElementLocated( lastNameInput ) ).sendKeys( owner.getLastName() );
+		wait.until( ExpectedConditions.visibilityOfElementLocated( addressInput ) ).sendKeys( owner.getAddress() );
+		wait.until( ExpectedConditions.visibilityOfElementLocated( cityInput ) ).sendKeys( owner.getCity() );
+		wait.until( ExpectedConditions.visibilityOfElementLocated( telephoneInput ) ).sendKeys( owner.getTelephone() );
 
 		boolean submitButtonEnabled = isSubmitButtonEnabled();
 		wait.until( ExpectedConditions.visibilityOfElementLocated( submitButton ) ).click();
 
-		if( submitButtonEnabled ) {
+		if ( submitButtonEnabled ) {
 			wait.until( ExpectedConditions.urlToBe( EnvReader.getBaseUrl() + "owners" ) );
 		}
 

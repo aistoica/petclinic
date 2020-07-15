@@ -8,6 +8,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.endava.petclinic.data.DataGeneration;
 import com.github.javafaker.Faker;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -18,6 +19,7 @@ public class TestBaseClass {
 
 	protected WebDriver driver;
 	protected Faker faker = new Faker();
+	protected DataGeneration dataGeneration = new DataGeneration();
 
 	@BeforeEach
 	public void setUpDriver() {
